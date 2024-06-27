@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PageBuilder extends StatelessWidget {
-  const PageBuilder({
+class ScaffoldBuilder extends StatelessWidget {
+  const ScaffoldBuilder({
     super.key,
     required this.slivers,
     this.bottomNavigationBar,
@@ -21,6 +21,37 @@ class PageBuilder extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: bottomNavigationBar,
+    );
+  }
+}
+
+class NestedScrollViewScaffoldBuilder extends StatelessWidget {
+  const NestedScrollViewScaffoldBuilder({
+    super.key,
+    required this.appBar,
+    required this.body,
+    this.extendBody = false,
+    this.controller,
+  });
+  final SliverAppBar appBar;
+  final bool extendBody;
+  final Widget body;
+
+  final ScrollController? controller;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: extendBody,
+      body: SafeArea(
+        bottom: false,
+        child: NestedScrollView(
+          controller: controller,
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [appBar];
+          },
+          body: body,
+        ),
+      ),
     );
   }
 }

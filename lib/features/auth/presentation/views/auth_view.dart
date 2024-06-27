@@ -15,7 +15,7 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        return PageBuilder(
+        return ScaffoldBuilder(
           slivers: [
             const SliverToBoxAdapter(
               child: Padding(
