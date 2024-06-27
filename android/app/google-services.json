@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "954082180234",
+    "project_id": "college-app-d31ae",
+    "storage_bucket": "college-app-d31ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954082180234:android:8360ac5f66beed1e6b4173",
+        "android_client_info": {
+          "package_name": "com.example.hogwarts_college_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdLGjoP7pPI7HsyBk5bn55GGln30II17Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
