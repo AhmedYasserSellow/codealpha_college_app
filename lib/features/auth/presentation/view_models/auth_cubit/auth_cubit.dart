@@ -48,4 +48,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future studentSignIn() async {}
+
+  Future signOut(BuildContext context) async {
+    await AuthRepoImpl().signOut(context);
+  }
 }

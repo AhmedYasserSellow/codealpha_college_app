@@ -33,7 +33,7 @@ class NestedScrollViewScaffoldBuilder extends StatelessWidget {
     this.extendBody = false,
     this.controller,
   });
-  final SliverAppBar appBar;
+  final Widget appBar;
   final bool extendBody;
   final Widget body;
 

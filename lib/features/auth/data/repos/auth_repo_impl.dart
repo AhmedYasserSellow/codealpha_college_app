@@ -11,7 +11,7 @@ class AuthRepoImpl implements AuthRepo {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       if (context.mounted) {
-        Navigator.pushNamed(
+        Navigator.pushReplacementNamed(
           context,
           AppRouter.adminView,
         );
@@ -28,6 +28,20 @@ class AuthRepoImpl implements AuthRepo {
           ),
         );
       }
+    }
+  }
+
+  @override
+  Future studentSignIn(
+      BuildContext context, String id, String password) async {}
+  @override
+  Future signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    if (context.mounted) {
+      Navigator.pushReplacementNamed(
+        context,
+        AppRouter.authView,
+      );
     }
   }
 }
