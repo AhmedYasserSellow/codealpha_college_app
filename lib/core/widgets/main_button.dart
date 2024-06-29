@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
 
-class SignInButton extends StatelessWidget {
-  const SignInButton({
+class MainButton extends StatelessWidget {
+  const MainButton({
     super.key,
     required this.text,
     this.onTap,

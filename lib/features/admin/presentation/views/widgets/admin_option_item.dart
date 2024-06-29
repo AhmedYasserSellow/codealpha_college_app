@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
-import 'package:hogwarts_college_app/features/admin/data/models/grid_item_model.dart';
+import 'package:hogwarts_college_app/features/admin/data/models/admin_options_model.dart';
 
 class GridItem extends StatelessWidget {
   const GridItem({
@@ -8,7 +8,7 @@ class GridItem extends StatelessWidget {
     required this.gridItemModel,
     required this.onTap,
   });
-  final GridItemModel gridItemModel;
+  final AdminOptionsModel gridItemModel;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {

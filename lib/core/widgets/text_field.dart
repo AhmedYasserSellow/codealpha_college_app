@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.isObscured = false,
     this.onTap,
     this.keyboardType = TextInputType.name,
+    this.validator,
   });
   final String title;
   final IconData icon;
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final bool isObscured;
   final void Function()? onTap;
   final TextInputType keyboardType;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +37,8 @@ class CustomTextField extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        TextField(
+        TextFormField(
+          validator: validator,
           keyboardType: keyboardType,
           onTap: onTap,
           obscureText: isObscured,
