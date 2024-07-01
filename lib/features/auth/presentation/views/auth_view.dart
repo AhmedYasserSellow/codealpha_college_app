@@ -47,6 +47,7 @@ class AuthView extends StatelessWidget {
                     context.read<AuthCubit>().currentIndex == 0
                         ? const AdminSignInForm()
                         : const StudentSignInForm(),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),

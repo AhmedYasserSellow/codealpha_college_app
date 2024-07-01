@@ -9,9 +9,29 @@ class UploadStudentDataCubit extends Cubit<UploadStudentDataState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   XFile? studentImage;
   TextEditingController studentNameController = TextEditingController();
-  TextEditingController studentIDController = TextEditingController();
+  TextEditingController studentPhoneController = TextEditingController();
+  String? studentHouse;
+  String? studentLevel;
   void pickStudentImage() async {
     studentImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     emit(StudentImagePicked());
+  }
+
+  void pickStudentHouse(String house) {
+    studentHouse = house;
+    emit(StudentHousePicked());
+  }
+
+  void pickStudentLevel(String level) {
+    studentLevel = level;
+    emit(StudentLevelPicked());
+  }
+
+  void uploadStudentData() {
+    if (formKey.currentState!.validate()) {
+      emit(UploadStudentDataLoading());
+
+      emit(UploadStudentDataSuccess());
+    }
   }
 }

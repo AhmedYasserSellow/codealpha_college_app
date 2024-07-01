@@ -1,13 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 
-class StudentItem extends StatelessWidget {
-  const StudentItem({
+class HouseItem extends StatelessWidget {
+  const HouseItem({
     super.key,
-    required this.snapshot,
+    required this.title,
   });
-  final QueryDocumentSnapshot<Map<String, dynamic>> snapshot;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +23,7 @@ class StudentItem extends StatelessWidget {
         color: Colors.transparent,
       ),
       child: Text(
-        snapshot.id,
+        'House of ${title.toUpperCase()}',
         textAlign: TextAlign.center,
         style: const TextStyle(
           color: SecondaryColors.main,

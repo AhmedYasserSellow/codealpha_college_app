@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hogwarts_college_app/core/widgets/main_button.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/select_house.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/select_level.dart';
+import 'package:hogwarts_college_app/features/auth/presentation/views/widgets/auth_button.dart';
 import 'package:hogwarts_college_app/core/widgets/text_field.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/view_models/upload_student_data/upload_student_data_cubit.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/upload_image_box.dart';
@@ -34,12 +36,41 @@ class AddStudentSheet extends StatelessWidget {
                     .studentNameController,
               ),
               CustomTextField(
-                title: 'ID',
-                icon: FontAwesomeIcons.idCard,
-                controller:
-                    context.read<UploadStudentDataCubit>().studentIDController,
+                title: 'Phone Number',
+                icon: FontAwesomeIcons.phone,
+                controller: context
+                    .read<UploadStudentDataCubit>()
+                    .studentPhoneController,
               ),
-              MainButton(
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('House :'),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SelectHouse(),
+                    ],
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Level :'),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      SelectLevel(),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              AuthButton(
                 text: 'Add Student',
                 onTap: () {},
               ),

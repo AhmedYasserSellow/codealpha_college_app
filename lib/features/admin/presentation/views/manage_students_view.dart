@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,7 +10,12 @@ import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/s
 
 class ManageStudentsView extends StatelessWidget {
   const ManageStudentsView({super.key});
-
+  static List<String> houses = [
+    'gryffindor',
+    'hufflepuff',
+    'ravenclaw',
+    'slytherin',
+  ];
   @override
   Widget build(BuildContext context) {
     return NestedScrollViewScaffoldBuilder(
@@ -37,43 +41,35 @@ class ManageStudentsView extends StatelessWidget {
         ],
       ),
       body: Sheet(
-        child: FutureBuilder(
-            future: FirebaseFirestore.instance.collection('students').get(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return CustomScrollView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  slivers: [
-                    const SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 16,
-                      ),
-                    ),
-                    SliverList.separated(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return StudentItem(
-                          snapshot: snapshot.data!.docs[index],
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 16,
-                        );
-                      },
-                    ),
-                    const SliverToBoxAdapter(
-                      child: SizedBox(
-                        height: 16,
-                      ),
-                    ),
-                  ],
+        child: CustomScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          slivers: [
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
+              ),
+            ),
+            SliverList.separated(
+              itemCount: houses.length,
+              itemBuilder: (context, index) {
+                return HouseItem(
+                  title: houses[index],
                 );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
+              },
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 16,
+                );
+              },
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

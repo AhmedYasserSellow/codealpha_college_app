@@ -5,6 +5,7 @@ import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/view_models/admin_cubit/admin_cubit.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,12 +13,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  int isLoggedIn = prefs.getInt('isLoggedIn') ?? 0;
+  runApp(MyApp(
+    isLoggedIn: isLoggedIn,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({super.key, required this.isLoggedIn});
+  final int isLoggedIn;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -34,7 +39,11 @@ class MyApp extends StatelessWidget {
         theme: theme,
         debugShowCheckedModeBanner: false,
         title: 'Hogwarts College App',
-        initialRoute: AppRouter.authView,
+        initialRoute: isLoggedIn == 0
+            ? AppRouter.authView
+            : isLoggedIn == 1
+                ? AppRouter.adminView
+                : AppRouter.authView,
       ),
     );
   }
