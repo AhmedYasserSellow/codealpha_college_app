@@ -1,7 +1,12 @@
 import 'dart:math';
 
-const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-Random _rnd = Random();
-
-String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+String generatePassword() {
+  final random = Random();
+  const characters =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+';
+  String password = '';
+  for (int i = 0; i < 8; i++) {
+    password += characters[random.nextInt(characters.length)];
+  }
+  return password;
+}

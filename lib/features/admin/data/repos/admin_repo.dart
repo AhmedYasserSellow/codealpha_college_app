@@ -1,6 +1,6 @@
-abstract class AdminRepo {
-  // Manage Houses
+import 'package:flutter/material.dart';
+import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
 
-  // Future addHouse();
-  // Future deleteHouse();
+abstract class AdminRepo {
+  Future uploadStudentData(BuildContext context, StudentModel studentModel);
 }

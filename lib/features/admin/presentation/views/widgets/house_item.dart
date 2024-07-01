@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
-import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
+import 'package:hogwarts_college_app/features/admin/data/models/path_model.dart';
 
-class StudentItem extends StatelessWidget {
-  const StudentItem({super.key, required this.studentModelWithPassword});
-  final StudentModelWithPassword studentModelWithPassword;
+class HouseItem extends StatelessWidget {
+  const HouseItem({
+    super.key,
+    required this.houseModel,
+  });
+
+  final HouseModel houseModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
-          AppRouter.studentView,
-          arguments: studentModelWithPassword,
+          AppRouter.levelsView,
+          arguments: houseModel,
         );
       },
       child: Container(
@@ -30,7 +34,7 @@ class StudentItem extends StatelessWidget {
           color: Colors.transparent,
         ),
         child: Text(
-          studentModelWithPassword.studentModel.phone,
+          'House of ${houseModel.houseFullName}',
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: SecondaryColors.main,

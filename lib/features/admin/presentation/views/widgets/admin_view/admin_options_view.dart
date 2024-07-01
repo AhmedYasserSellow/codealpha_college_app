@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
 import 'package:hogwarts_college_app/features/admin/data/models/admin_options_model.dart';
-import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/admin_option_item.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/admin_view/admin_option_item.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
 
 class AdminOptionsView extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +17,7 @@ class AdminOptionsView extends StatelessWidget implements PreferredSizeWidget {
         icon: FontAwesomeIcons.arrowRightFromBracket, title: 'Sign\nOut'),
   ];
   static List<String> navigatorRoutes = [
-    AppRouter.studentView,
+    AppRouter.housesView,
     AppRouter.eventsView,
   ];
   @override

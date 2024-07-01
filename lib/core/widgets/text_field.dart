@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.keyboardType = TextInputType.name,
     this.validator,
+    this.readOnly = false,
   });
   final String title;
   final IconData icon;
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final void Function()? onTap;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final bool readOnly;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
           height: 8,
         ),
         TextFormField(
+          readOnly: readOnly,
           validator: validator,
           keyboardType: keyboardType,
           onTap: onTap,
@@ -50,6 +53,10 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(50),
             ),
             focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: NeutralColors.k200),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            disabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(width: 1, color: NeutralColors.k200),
               borderRadius: BorderRadius.circular(50),
             ),
