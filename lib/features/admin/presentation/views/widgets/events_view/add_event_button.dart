@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
-import 'package:hogwarts_college_app/features/admin/presentation/view_models/upload_student_data/upload_student_data_cubit.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/view_models/events_cubit/events_cubit.dart';
 
-class AddButton extends StatelessWidget {
-  const AddButton({
+class AddEventButton extends StatelessWidget {
+  const AddEventButton({
     super.key,
     required this.text,
     this.onTap,
@@ -17,7 +17,7 @@ class AddButton extends StatelessWidget {
   final Color textColor;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UploadStudentDataCubit, UploadStudentDataState>(
+    return BlocBuilder<EventsCubit, EventsState>(
       builder: (context, state) {
         return GestureDetector(
           onTap: onTap,
@@ -29,7 +29,7 @@ class AddButton extends StatelessWidget {
               color: buttonColor,
             ),
             child: Center(
-              child: state is UploadStudentDataLoading
+              child: state is UploadEventDataLoading
                   ? const CircularProgressIndicator(
                       color: Colors.white,
                     )

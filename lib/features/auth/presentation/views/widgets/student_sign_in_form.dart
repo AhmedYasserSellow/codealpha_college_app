@@ -16,8 +16,8 @@ class StudentSignInForm extends StatelessWidget {
     return Column(
       children: [
         CustomTextField(
-          title: 'ID',
-          icon: FontAwesomeIcons.idCard,
+          title: 'ID / Phone Number',
+          icon: FontAwesomeIcons.phone,
           controller: context.read<AuthCubit>().studentIDController,
         ),
         CustomTextField(
@@ -27,7 +27,12 @@ class StudentSignInForm extends StatelessWidget {
           icon: FontAwesomeIcons.envelope,
           controller: context.read<AuthCubit>().studentPasswordController,
         ),
-        const AuthButton(text: 'Sign In'),
+        AuthButton(
+          text: 'Sign In',
+          onTap: () {
+            context.read<AuthCubit>().studentSignIn(context);
+          },
+        ),
       ],
     );
   }

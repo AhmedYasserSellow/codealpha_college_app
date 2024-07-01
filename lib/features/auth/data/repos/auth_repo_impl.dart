@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
@@ -35,8 +36,38 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future studentSignIn(
-      BuildContext context, String id, String password) async {}
+  Future studentSignIn(BuildContext context, String id, String password) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> doc =
+          await FirebaseFirestore.instance.collection('students').doc(id).get();
+
+      if (doc.exists && doc.data()!['pw'] == password) {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setInt('isLoggedIn', 2);
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(
+            context,
+            AppRouter.homeView,
+          );
+        }
+      } else {
+        throw Exception();
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'ID or Password is incorrect',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Future signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();

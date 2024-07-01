@@ -47,7 +47,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthPageUpdated());
   }
 
-  Future studentSignIn() async {}
+  Future studentSignIn(BuildContext context) async {
+    emit(StudentButtonisLoading());
+    await AuthRepoImpl().studentSignIn(
+      context,
+      studentIDController.text,
+      studentPasswordController.text,
+    );
+    emit(AuthPageUpdated());
+  }
 
   Future signOut(BuildContext context) async {
     await AuthRepoImpl().signOut(context);

@@ -7,3 +7,5 @@ final class AuthInitial extends AuthState {}
 final class AuthPageUpdated extends AuthState {}
 
 final class AdminButtonisLoading extends AuthState {}
+
+final class StudentButtonisLoading extends AuthState {}

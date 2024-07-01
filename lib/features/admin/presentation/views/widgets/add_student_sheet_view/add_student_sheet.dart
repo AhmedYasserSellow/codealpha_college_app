@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/add_student_sheet_view/add_student_button.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/add_student_sheet_view/select_house.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/add_student_sheet_view/select_level.dart';
-import 'package:hogwarts_college_app/features/auth/presentation/views/widgets/auth_button.dart';
 import 'package:hogwarts_college_app/core/widgets/text_field.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/view_models/upload_student_data/upload_student_data_cubit.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/widgets/add_student_sheet_view/upload_image_box.dart';
@@ -70,7 +70,7 @@ class AddStudentSheet extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              AuthButton(
+              AddStudentButton(
                 text: 'Add Student',
                 onTap: () {
                   context
