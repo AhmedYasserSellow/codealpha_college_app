@@ -3,12 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
-import 'package:hogwarts_college_app/features/admin/presentation/view_models/events_cubit/events_cubit.dart';
-import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
+import 'package:hogwarts_college_app/features/home/presentation/view_models/home_cubit/home_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
-
-int isLoggedInPuplic = 0;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +14,6 @@ void main() async {
   );
   final prefs = await SharedPreferences.getInstance();
   int isLoggedIn = prefs.getInt('isLoggedIn') ?? 0;
-  isLoggedInPuplic = isLoggedIn;
   runApp(MyApp(
     isLoggedIn: isLoggedIn,
   ));
@@ -28,15 +24,8 @@ class MyApp extends StatelessWidget {
   final int isLoggedIn;
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AuthCubit(),
-        ),
-        BlocProvider(
-          create: (context) => EventsCubit(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => HomeCubit()..loadData(),
       child: MaterialApp(
         routes: AppRouter.routes,
         theme: theme,
@@ -46,7 +35,7 @@ class MyApp extends StatelessWidget {
             ? AppRouter.authView
             : isLoggedIn == 1
                 ? AppRouter.adminView
-                : AppRouter.authView,
+                : AppRouter.homeView,
       ),
     );
   }

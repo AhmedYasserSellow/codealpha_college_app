@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/core/models/event_model.dart';
 import 'package:hogwarts_college_app/features/admin/data/repos/admin_repo_impl.dart';
-import 'package:hogwarts_college_app/main.dart';
+import 'package:hogwarts_college_app/features/home/presentation/view_models/home_cubit/home_cubit.dart';
 
 class EventPlaceHolder extends StatelessWidget {
   const EventPlaceHolder(
@@ -51,7 +52,7 @@ class EventPlaceHolder extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
-            isLoggedInPuplic == 1
+            context.read<HomeCubit>().isLoggedIn == 1
                 ? TextButton(
                     child: const Text(
                       'Delete Event',

@@ -6,8 +6,9 @@ import 'package:hogwarts_college_app/features/admin/presentation/views/events_vi
 import 'package:hogwarts_college_app/features/admin/presentation/views/houses_view.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/levels_view.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/students_view.dart';
+import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/views/auth_view.dart';
-import 'package:hogwarts_college_app/features/home/presentation/view/home_view.dart';
+import 'package:hogwarts_college_app/features/home/presentation/views/home_view.dart';
 import 'package:hogwarts_college_app/features/student/presentataion/views/student_view.dart';
 
 abstract class AppRouter {
@@ -21,7 +22,10 @@ abstract class AppRouter {
   static String homeView = '/homeView';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    authView: (BuildContext context) => const AuthView(),
+    authView: (BuildContext context) => BlocProvider(
+          create: (context) => AuthCubit(),
+          child: const AuthView(),
+        ),
     adminView: (BuildContext context) => const AdminView(),
     housesView: (BuildContext context) => const HousesView(),
     levelsView: (BuildContext context) => const LevelsView(),

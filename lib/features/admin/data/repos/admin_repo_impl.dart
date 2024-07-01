@@ -41,6 +41,8 @@ class AdminRepoImpl implements AdminRepo {
             .set({
           'id': studentModel.phone,
           'pw': password,
+          'house': studentModel.house,
+          'level': studentModel.level,
         });
       });
       if (context.mounted) {

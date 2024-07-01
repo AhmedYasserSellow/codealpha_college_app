@@ -13,27 +13,31 @@ class StudentSignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(
-          title: 'ID / Phone Number',
-          icon: FontAwesomeIcons.phone,
-          controller: context.read<AuthCubit>().studentIDController,
-        ),
-        CustomTextField(
-          isObscured: context.read<AuthCubit>().isObscured,
-          suffix: const Eye(),
-          title: 'Password',
-          icon: FontAwesomeIcons.envelope,
-          controller: context.read<AuthCubit>().studentPasswordController,
-        ),
-        AuthButton(
-          text: 'Sign In',
-          onTap: () {
-            context.read<AuthCubit>().studentSignIn(context);
-          },
-        ),
-      ],
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            CustomTextField(
+              title: 'ID / Phone Number',
+              icon: FontAwesomeIcons.phone,
+              controller: context.read<AuthCubit>().studentIDController,
+            ),
+            CustomTextField(
+              isObscured: context.read<AuthCubit>().isObscured,
+              suffix: const Eye(),
+              title: 'Password',
+              icon: FontAwesomeIcons.envelope,
+              controller: context.read<AuthCubit>().studentPasswordController,
+            ),
+            AuthButton(
+              text: 'Sign In',
+              onTap: () {
+                context.read<AuthCubit>().studentSignIn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

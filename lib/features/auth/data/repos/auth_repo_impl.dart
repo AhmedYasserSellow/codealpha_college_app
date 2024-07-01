@@ -44,6 +44,10 @@ class AuthRepoImpl implements AuthRepo {
       if (doc.exists && doc.data()!['pw'] == password) {
         final prefs = await SharedPreferences.getInstance();
         prefs.setInt('isLoggedIn', 2);
+        prefs.setString('id', id);
+        prefs.setString('house', doc.data()!['house']!);
+        prefs.setString('level', doc.data()!['level']!);
+
         if (context.mounted) {
           Navigator.pushReplacementNamed(
             context,
