@@ -30,6 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/lib/core/utils/cloud_messaging_service.dart
 
 # Symbolication related
 app.*.symbols

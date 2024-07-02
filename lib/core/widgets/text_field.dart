@@ -60,6 +60,10 @@ class CustomTextField extends StatelessWidget {
               borderSide: const BorderSide(width: 1, color: NeutralColors.k200),
               borderRadius: BorderRadius.circular(50),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: NeutralColors.k200),
+              borderRadius: BorderRadius.circular(50),
+            ),
             prefixIcon: Icon(
               icon,
               color: NeutralColors.k200,

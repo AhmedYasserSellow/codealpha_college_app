@@ -30,27 +30,30 @@ class NestedScrollViewScaffoldBuilder extends StatelessWidget {
     super.key,
     required this.appBar,
     required this.body,
-    this.extendBody = false,
     this.controller,
+    this.bottomNavigationBar,
   });
   final Widget appBar;
-  final bool extendBody;
   final Widget body;
-
+  final Widget? bottomNavigationBar;
   final ScrollController? controller;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: extendBody,
-      body: SafeArea(
-        bottom: false,
-        child: NestedScrollView(
-          controller: controller,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [appBar];
-          },
-          body: body,
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: NestedScrollView(
+            controller: controller,
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [appBar];
+            },
+            body: body,
+          ),
         ),
+        bottomNavigationBar: bottomNavigationBar,
       ),
     );
   }

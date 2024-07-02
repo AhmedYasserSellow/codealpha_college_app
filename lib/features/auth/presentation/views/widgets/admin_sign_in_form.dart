@@ -13,27 +13,31 @@ class AdminSignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(
-          title: 'Email',
-          icon: FontAwesomeIcons.envelope,
-          controller: context.read<AuthCubit>().adminEmailController,
-        ),
-        CustomTextField(
-          isObscured: context.read<AuthCubit>().isObscured,
-          suffix: const Eye(),
-          title: 'Password',
-          icon: FontAwesomeIcons.envelope,
-          controller: context.read<AuthCubit>().adminPasswordController,
-        ),
-        AuthButton(
-          text: 'Sign In',
-          onTap: () {
-            context.read<AuthCubit>().adminSignIn(context);
-          },
-        ),
-      ],
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            CustomTextField(
+              title: 'Email',
+              icon: FontAwesomeIcons.envelope,
+              controller: context.read<AuthCubit>().adminEmailController,
+            ),
+            CustomTextField(
+              isObscured: context.read<AuthCubit>().isObscured,
+              suffix: const Eye(),
+              title: 'Password',
+              icon: FontAwesomeIcons.envelope,
+              controller: context.read<AuthCubit>().adminPasswordController,
+            ),
+            AuthButton(
+              text: 'Sign In',
+              onTap: () {
+                context.read<AuthCubit>().adminSignIn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
