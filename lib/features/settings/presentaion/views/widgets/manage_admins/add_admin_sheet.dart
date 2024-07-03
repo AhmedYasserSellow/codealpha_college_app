@@ -15,9 +15,8 @@ class AddAdminView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AdminCubit(),
-      child: BlocBuilder<AdminCubit, AdminState>(builder: (context, state) {
+    return BlocBuilder<AdminCubit, AdminState>(
+      builder: (context, state) {
         return Padding(
           padding: EdgeInsets.only(
               left: 16,
@@ -140,7 +139,7 @@ class AddAdminView extends StatelessWidget {
             ),
           ),
         );
-      }),
+      },
     );
   }
 }

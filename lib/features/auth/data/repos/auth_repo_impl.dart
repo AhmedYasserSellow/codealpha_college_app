@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
 import 'package:hogwarts_college_app/features/auth/data/repos/auth_repo.dart';
+import 'package:hogwarts_college_app/features/settings/data/models/admin_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepoImpl implements AuthRepo {
@@ -11,14 +12,21 @@ class AuthRepoImpl implements AuthRepo {
       BuildContext context, String email, String password) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
-      if (context.mounted) {
-        Navigator.pushReplacementNamed(
-          context,
-          AppRouter.adminView,
-        );
-      }
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((admin) {
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(
+            context,
+            AppRouter.adminView,
+            arguments: AdminModel(
+              name: admin.user!.displayName!,
+              email: email,
+              password: password,
+              image: admin.user!.photoURL!,
+            ),
+          );
+        }
+      });
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -40,6 +40,13 @@ class SettingsView extends StatelessWidget {
             icon: FontAwesomeIcons.users,
             title: 'Manage Students',
           ),
+          SettingsListTile(
+            onTap: () {
+              Navigator.pushNamed(context, AppRouter.manageEventsView);
+            },
+            icon: FontAwesomeIcons.calendar,
+            title: 'Manage Events',
+          ),
           const SizedBox(
             height: 16,
           ),

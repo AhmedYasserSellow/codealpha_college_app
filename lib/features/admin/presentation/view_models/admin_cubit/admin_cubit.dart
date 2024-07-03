@@ -4,11 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
 import 'package:hogwarts_college_app/features/admin/data/repos/admin_repo_impl.dart';
+import 'package:hogwarts_college_app/features/admin/presentation/views/admin_view_body.dart';
 import 'package:hogwarts_college_app/features/settings/data/models/admin_model.dart';
 import 'package:hogwarts_college_app/features/settings/presentaion/views/settings_view.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/add_student_view.dart';
 import 'package:hogwarts_college_app/features/events/data/models/event_model.dart';
-import 'package:hogwarts_college_app/features/events/presentation/views/events_view.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/add_events_view.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,17 +19,15 @@ class AdminCubit extends Cubit<AdminState> {
 
   int currentPage = 0;
   List adminPages = const [
-    EventsView(
-      isAdmin: true,
-    ),
+    AdminViewBody(),
     AddStudentView(),
     AddEventsView(),
     SettingsView(),
   ];
   List<GButton> tabs = const [
     GButton(
-      icon: FontAwesomeIcons.calendar,
-      text: 'Events',
+      icon: FontAwesomeIcons.house,
+      text: 'Home',
     ),
     GButton(
       icon: FontAwesomeIcons.users,

@@ -9,10 +9,14 @@ class AuthForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.read<AuthCubit>().currentIndex == 0) {
-      return const AdminSignInForm();
-    } else {
-      return const StudentSignInForm();
-    }
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        if (context.read<AuthCubit>().currentIndex == 0) {
+          return const AdminSignInForm();
+        } else {
+          return const StudentSignInForm();
+        }
+      },
+    );
   }
 }
