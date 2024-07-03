@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/view_models/admin_cubit/admin_cubit.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/admin_view.dart';
+import 'package:hogwarts_college_app/features/home/presentation/view_models/home_cubit/home_cubit.dart';
+import 'package:hogwarts_college_app/features/settings/presentaion/views/admin_profile_view.dart';
 import 'package:hogwarts_college_app/features/settings/presentaion/views/houses_view.dart';
 import 'package:hogwarts_college_app/features/settings/presentaion/views/levels_view.dart';
+import 'package:hogwarts_college_app/features/settings/presentaion/views/manage_admins_view.dart';
+import 'package:hogwarts_college_app/features/settings/presentaion/views/student_profile_view.dart';
 import 'package:hogwarts_college_app/features/settings/presentaion/views/students_view.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/view_models/auth_cubit/auth_cubit.dart';
 import 'package:hogwarts_college_app/features/auth/presentation/views/auth_view.dart';
 import 'package:hogwarts_college_app/features/home/presentation/views/home_view.dart';
-import 'package:hogwarts_college_app/features/student/presentataion/views/student_view.dart';
 
 abstract class AppRouter {
   static String authView = '/authView';
@@ -17,6 +20,8 @@ abstract class AppRouter {
   static String levelsView = '/levelsView';
   static String studentsView = '/studentsView';
   static String studentView = '/studentView';
+  static String manageAdminsView = '/manageAdminsView';
+  static String adminProfileView = '/adminProfileView';
   static String homeView = '/homeView';
 
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -28,10 +33,15 @@ abstract class AppRouter {
           create: (context) => AdminCubit(),
           child: const AdminView(),
         ),
+    homeView: (BuildContext context) => BlocProvider(
+          create: (context) => HomeCubit(),
+          child: const HomeView(),
+        ),
     housesView: (BuildContext context) => const HousesView(),
     levelsView: (BuildContext context) => const LevelsView(),
     studentsView: (BuildContext context) => const StudentsView(),
-    studentView: (BuildContext context) => const StudentView(),
-    homeView: (BuildContext context) => const HomeView(),
+    studentView: (BuildContext context) => const StudentProfileView(),
+    manageAdminsView: (BuildContext context) => const ManageAdminsView(),
+    adminProfileView: (BuildContext context) => const AdminProfileView(),
   };
 }

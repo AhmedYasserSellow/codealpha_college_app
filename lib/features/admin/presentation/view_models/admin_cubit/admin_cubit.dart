@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
 import 'package:hogwarts_college_app/features/admin/data/repos/admin_repo_impl.dart';
+import 'package:hogwarts_college_app/features/settings/data/models/admin_model.dart';
 import 'package:hogwarts_college_app/features/settings/presentaion/views/settings_view.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/views/add_student_view.dart';
 import 'package:hogwarts_college_app/features/events/data/models/event_model.dart';
@@ -74,16 +75,29 @@ class AdminCubit extends Cubit<AdminState> {
     if (addstudentsFormKey.currentState!.validate()) {
       emit(UploadStudentDataLoading());
 
-      AdminRepoImpl().uploadStudentData(
-          context,
-          StudentModel(
-            name: studentNameController.text,
-            phone: studentPhoneController.text,
-            house: studentHouse,
-            level: studentLevel,
-            image: studentImage!.path,
+      try {
+        await AdminRepoImpl().uploadStudentData(
+            context,
+            StudentModel(
+              name: studentNameController.text,
+              phone: studentPhoneController.text,
+              house: studentHouse,
+              level: studentLevel,
+              image: studentImage!.path,
+            ));
+        emit(UploadStudentDataSuccess());
+      } catch (e) {
+        emit(UploadStudentDataError());
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              'there was an error , try again later',
+              style: TextStyle(color: Colors.white),
+            ),
           ));
-      emit(UploadStudentDataSuccess());
+        }
+      }
     }
   }
 
@@ -121,6 +135,47 @@ class AdminCubit extends Cubit<AdminState> {
       emit(UploadEventDataSuccess());
     } catch (e) {
       emit(UploadEventDataError());
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            'there was an error , try again later',
+            style: TextStyle(color: Colors.white),
+          ),
+        ));
+      }
+    }
+  }
+
+// Add Admins Section
+
+  TextEditingController adminFirstNameController = TextEditingController();
+  TextEditingController adminLastNameController = TextEditingController();
+  TextEditingController adminEmailController = TextEditingController();
+  TextEditingController adminPasswordController = TextEditingController();
+  XFile? adminImage;
+
+  void pickAdminImage() async {
+    adminImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    emit(AdminImagePicked());
+  }
+
+  void uploadAdminData(BuildContext context) async {
+    emit(UploadAdminDataLoading());
+    try {
+      await AdminRepoImpl().uploadAdminData(
+        context,
+        AdminModel(
+          name:
+              '${adminFirstNameController.text} ${adminLastNameController.text}',
+          email: '${adminEmailController.text}@hogwarts.std',
+          image: adminImage!.path,
+          password: adminPasswordController.text,
+        ),
+      );
+      emit(UploadAdminDataSuccess());
+    } catch (e) {
+      emit(UploadAdminDataError());
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.red,

@@ -12,8 +12,7 @@ class AuthRepoImpl implements AuthRepo {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setInt('isLoggedIn', 1);
+
       if (context.mounted) {
         Navigator.pushReplacementNamed(
           context,
@@ -42,8 +41,11 @@ class AuthRepoImpl implements AuthRepo {
           await FirebaseFirestore.instance.collection('students').doc(id).get();
 
       if (doc.exists && doc.data()!['pw'] == password) {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'student@hogwarts.std',
+          password: '12345678',
+        );
         final prefs = await SharedPreferences.getInstance();
-        prefs.setInt('isLoggedIn', 2);
         prefs.setString('id', id);
         prefs.setString('house', doc.data()!['house']!);
         prefs.setString('level', doc.data()!['level']!);
@@ -75,8 +77,6 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('isLoggedIn', 0);
     if (context.mounted) {
       Navigator.pushReplacementNamed(
         context,

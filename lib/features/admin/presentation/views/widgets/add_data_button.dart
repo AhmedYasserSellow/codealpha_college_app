@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/features/admin/presentation/view_models/admin_cubit/admin_cubit.dart';
 
-class AddEventButton extends StatelessWidget {
-  const AddEventButton({
+class AddDataButton extends StatelessWidget {
+  const AddDataButton({
     super.key,
     required this.text,
     this.onTap,
@@ -29,7 +29,9 @@ class AddEventButton extends StatelessWidget {
               color: buttonColor,
             ),
             child: Center(
-              child: state is UploadEventDataLoading
+              child: state is UploadStudentDataLoading ||
+                      state is UploadEventDataLoading ||
+                      state is UploadAdminDataLoading
                   ? const CircularProgressIndicator(
                       color: Colors.white,
                     )

@@ -27,7 +27,9 @@ class SettingsView extends StatelessWidget {
             ),
           ),
           SettingsListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, AppRouter.manageAdminsView);
+            },
             icon: FontAwesomeIcons.usersGear,
             title: 'Manage Admins',
           ),
