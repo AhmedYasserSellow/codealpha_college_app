@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class HomeRepoImpl implements HomeRepo {
   @override
   Future addEventToSchedule(
-      EventModel eventModel, StudentModel studentModel) async {
+      String eventID, EventModel eventModel, StudentModel studentModel) async {
     String dateString = '${eventModel.date} ${eventModel.time}';
     DateFormat dateFormat = DateFormat('MMM d, yyyy h:mm a');
     DateTime dateTime = dateFormat.parse(dateString);
@@ -17,7 +17,7 @@ class HomeRepoImpl implements HomeRepo {
         .collection(studentModel.level)
         .doc(studentModel.phone)
         .collection('schedule')
-        .doc()
+        .doc(eventID)
         .set(
       {
         'name': eventModel.name,

@@ -72,6 +72,7 @@ class SignOutSheet extends StatelessWidget {
                   child: SignOutButton(
                     text: 'Sign Out',
                     onTap: () {
+                      Navigator.pop(context);
                       AuthRepoImpl().signOut(context);
                     },
                   ),

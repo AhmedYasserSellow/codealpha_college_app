@@ -47,7 +47,6 @@ class AdminRepoImpl implements AdminRepo {
       });
     });
     if (context.mounted) {
-      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.black,
         content: Text(

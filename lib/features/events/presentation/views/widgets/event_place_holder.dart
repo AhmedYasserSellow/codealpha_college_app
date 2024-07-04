@@ -39,7 +39,7 @@ class EventPlaceHolder extends StatelessWidget {
             Text(
               '${eventModel.date} ${eventModel.time}',
               style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: PrimaryColors.main,
                   fontWeight: FontWeight.bold),
             ),
@@ -52,7 +52,7 @@ class EventPlaceHolder extends StatelessWidget {
             Text(
               eventModel.location,
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: SecondaryColors.main,
               ),
@@ -80,6 +80,7 @@ class EventPlaceHolder extends StatelessWidget {
                     ),
                     onPressed: () {
                       HomeRepoImpl().addEventToSchedule(
+                        eventID,
                         eventModel,
                         studentModelWithPassword!.studentModel,
                       );
