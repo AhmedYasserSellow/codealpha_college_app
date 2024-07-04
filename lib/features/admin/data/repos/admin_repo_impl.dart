@@ -43,6 +43,7 @@ class AdminRepoImpl implements AdminRepo {
         'pw': password,
         'house': studentModel.house,
         'level': studentModel.level,
+        'image': value,
       });
     });
     if (context.mounted) {

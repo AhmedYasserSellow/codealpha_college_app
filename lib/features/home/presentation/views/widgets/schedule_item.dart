@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/colors.dart';
 import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
 import 'package:hogwarts_college_app/features/events/data/models/event_model.dart';
-import 'package:hogwarts_college_app/features/admin/data/repos/admin_repo_impl.dart';
 import 'package:hogwarts_college_app/features/home/data/repos/home_repo_impl.dart';
 
-class EventPlaceHolder extends StatelessWidget {
-  const EventPlaceHolder({
+class ScheduleItem extends StatelessWidget {
+  const ScheduleItem({
     super.key,
     required this.eventModel,
     required this.eventID,
-    required this.isAdmin,
-    required this.studentModelWithPassword,
+    required this.studentModel,
   });
   final EventModel eventModel;
   final String eventID;
-  final bool isAdmin;
-  final StudentModelWithPassword? studentModelWithPassword;
+  final StudentModel studentModel;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -59,32 +56,17 @@ class EventPlaceHolder extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
-            isAdmin
-                ? TextButton(
-                    child: const Text(
-                      'Delete Event',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    ),
-                    onPressed: () {
-                      AdminRepoImpl().deleteEvent(eventID);
-                    },
-                  )
-                : TextButton(
-                    child: const Text(
-                      'Add to Schedule',
-                      style: TextStyle(
-                        color: Colors.green,
-                      ),
-                    ),
-                    onPressed: () {
-                      HomeRepoImpl().addEventToSchedule(
-                        eventModel,
-                        studentModelWithPassword!.studentModel,
-                      );
-                    },
-                  ),
+            TextButton(
+              child: const Text(
+                'Remove from schedule',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+              onPressed: () {
+                HomeRepoImpl().deleteEventFromSchedule(studentModel, eventID);
+              },
+            )
           ],
         ),
       ],

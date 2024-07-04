@@ -44,7 +44,16 @@ abstract class AppRouter {
     housesView: (BuildContext context) => const HousesView(),
     levelsView: (BuildContext context) => const LevelsView(),
     studentsView: (BuildContext context) => const StudentsView(),
-    studentView: (BuildContext context) => const StudentProfileView(),
+    studentView: (BuildContext context) =>
+        const NestedScrollViewScaffoldBuilder(
+          appBar: CustomAppBar(
+            title: 'Student Info',
+            trailing: [],
+          ),
+          body: StudentProfileView(
+            isAdmin: true,
+          ),
+        ),
     manageAdminsView: (BuildContext context) => const ManageAdminsView(),
     adminProfileView: (BuildContext context) => const AdminProfileView(),
     manageEventsView: (BuildContext context) =>

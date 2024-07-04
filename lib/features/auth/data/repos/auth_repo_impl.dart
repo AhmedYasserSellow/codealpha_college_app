@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hogwarts_college_app/core/utils/routes.dart';
+import 'package:hogwarts_college_app/features/admin/data/models/student_model.dart';
 import 'package:hogwarts_college_app/features/auth/data/repos/auth_repo.dart';
 import 'package:hogwarts_college_app/features/settings/data/models/admin_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepoImpl implements AuthRepo {
   @override
@@ -53,15 +53,21 @@ class AuthRepoImpl implements AuthRepo {
           email: 'student@hogwarts.std',
           password: '12345678',
         );
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString('id', id);
-        prefs.setString('house', doc.data()!['house']!);
-        prefs.setString('level', doc.data()!['level']!);
 
         if (context.mounted) {
           Navigator.pushReplacementNamed(
             context,
             AppRouter.homeView,
+            arguments: StudentModelWithPassword(
+              studentModel: StudentModel(
+                name: doc.data()!['name'],
+                phone: doc.data()!['id'],
+                house: doc.data()!['house'],
+                level: doc.data()!['level'],
+                image: doc.data()!['image'],
+              ),
+              password: password,
+            ),
           );
         }
       } else {
